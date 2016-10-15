@@ -3,6 +3,7 @@ package com.gb.lesson1.obstacles;
 import com.gb.lesson1.animals.Animal;
 import com.gb.lesson1.animals.Swimable;
 import com.gb.lesson1.exceptions.AnimalOutFromDistanceException;
+import com.gb.lesson1.exceptions.FailException;
 import com.gb.lesson1.exceptions.WaterFailException;
 
 /**
@@ -15,7 +16,7 @@ public class Water extends Obstacle {
     }
 
     @Override
-    public void doIt(Animal animal) throws AnimalOutFromDistanceException, WaterFailException {
+    public void doIt(Animal animal) throws AnimalOutFromDistanceException, FailException {
         if (animal instanceof Swimable) {
             Swimable swimableAnimal = (Swimable) animal;
             try {
@@ -26,12 +27,7 @@ public class Water extends Obstacle {
                 throw new WaterFailException(getValue(), animal.toString());
             }
         } else {
-            try {
-                animal.crossFail();
-            }
-            catch (AnimalOutFromDistanceException e) {
-                throw new WaterFailException(getValue(), animal.toString());
-            }
+            throw new WaterFailException(getValue(), animal.toString());
         }
     }
 

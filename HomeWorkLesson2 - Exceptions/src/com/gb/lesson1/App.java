@@ -4,10 +4,7 @@ import com.gb.lesson1.animals.Animal;
 import com.gb.lesson1.animals.Cat;
 import com.gb.lesson1.animals.Duck;
 import com.gb.lesson1.animals.Turtle;
-import com.gb.lesson1.exceptions.AnimalOutFromDistanceException;
-import com.gb.lesson1.exceptions.CrossFailException;
-import com.gb.lesson1.exceptions.WallFailException;
-import com.gb.lesson1.exceptions.WaterFailException;
+import com.gb.lesson1.exceptions.*;
 import com.gb.lesson1.obstacles.Cross;
 import com.gb.lesson1.obstacles.Wall;
 import com.gb.lesson1.obstacles.Water;
@@ -17,7 +14,7 @@ import com.gb.lesson1.obstacles.Obstacle;
  * Created by Tim on 12.07.2016.
  */
 public class App {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws AnimalOutFromDistanceException {
         System.out.println("Готовимся к старту...");
 
         Animal[] animals = new Animal[3];
@@ -43,9 +40,7 @@ public class App {
                     try {
                         obstacle.doIt(animal);
                     }
-                    catch (AnimalOutFromDistanceException e) {
-                    }
-                    catch (WaterFailException | CrossFailException | WallFailException e) {
+                    catch (FailException e) {
                         System.out.println(e.getFailInfo());
                     }
                 }
